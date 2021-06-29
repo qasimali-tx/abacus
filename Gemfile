@@ -53,6 +53,7 @@ group :test do
 end
 
 # DSL
+gem "haml-rails", "~> 2.0"
 gem 'simple_form'
 
 # Front End Formatting
