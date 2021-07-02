@@ -52,7 +52,14 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-
+group :development do
+  gem 'capistrano',         require: false
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rbenv-install'
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+end
 # DSL
 gem "haml-rails", "~> 2.0"
 gem 'simple_form'

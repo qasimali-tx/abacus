@@ -14,5 +14,5 @@ test:
 production:
   <<: *default
   database: abacus_production
-  username: abacus
+  username: deploy
   password: <%= ENV['ABACUS_DATABASE_PASSWORD'] %>
