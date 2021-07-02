@@ -7,6 +7,7 @@ require 'capistrano/bundler'
 require 'capistrano/rbenv'
 require 'capistrano/rbenv_install'
 require "capistrano/scm/git"
+require 'capistrano/nginx'
 install_plugin Capistrano::SCM::Git
 
 require 'capistrano/puma'

@@ -50,6 +50,8 @@ namespace :puma do
   before 'deploy:starting', 'puma:make_dirs'
 end
 before "deploy:assets:precompile", "deploy:yarn_install"
+after 'deploy:publishing', 'deploy:restart'
+
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
@@ -91,7 +93,7 @@ namespace :deploy do
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  # after  :finishing,    :restart
 end
 
 # ps aux | grep puma    # Get puma pid
