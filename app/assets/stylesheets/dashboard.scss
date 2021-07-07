@@ -1,0 +1,10 @@
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.notification {
+  position: fixed; top: 100px; display: flex; align-items: center; z-index: 9999; right: -350px; min-height: 50px; width: 350px; border-radius: 5px; transition: right 250ms ease-in-out; overflow: hidden; padding: 10px;
+  &.success {background-color: #16d39a; color: #002d62;}
+  &.error {background-color: #eb6e1f; color: #FFFFFF;}
+  &.show {right: 10px;}
+}

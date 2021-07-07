@@ -4,6 +4,18 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="fname">First Name<span>*</span></label>
+        <%= f.input :first_name, as: :string, :required => true, :input_html => { :class => 'form-control' }, label: false  %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="lname">Last Name<span>*</span></label>
+        <%= f.input :last_name, as: :string, :required => true, :input_html => { :class => 'form-control' }, label: false  %>
+      </div>
+    </div>
     <%= f.input :email,
                 required: true,
                 autofocus: true,

@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-11"><h1>Abacus Payment System</h1></div>
+    <div class="col-1 " style="padding-top: 7px;">
+      <%=button_to "Sign Out",destroy_user_session_path, :method => :delete %>
+    </div>
+  </div>
+
+  <div class="m-4">
+    <center> <h4>Stripe Payment</h4></center>
+  </div>
+
+  <div class = "row d-flex justify-content-center">
+    <% @subscriptions.data.each do |subscription| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body m-4">
+          <h5 class="card-title"><%= subscription_name(subscription["product"]) %></h5>
+          <p class="card-text">Price: <span><%= "#{subscription["unit_amount_decimal"].to_i/100} #{subscription["currency"].upcase}"  %></span></p>
+          <%if current_user.default_source.present? %>
+            <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(subscription["id"]), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
+            <%else%>
+            <%=link_to "Subscribe",create_stripe_card_dashboards_url, :class=> "btn btn-primary", :method=> 'get' %>
+            <%end %>
+        </div>
+      </div>
+    <%end %>
+  </div>
+</div>

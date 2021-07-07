@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="column">
+    <div id="card-element"></div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+        var stripe = Stripe('pk_test_hXRMl76AyqML8W0RAvGrYuog');
+        var elements = stripe.elements();
+
+        // Custom styling can be passed to options when creating an Element.
+        var style = {
+            base: {
+                color: '#303238',
+                fontSize: '16px',
+                fontFamily: '"Open Sans", sans-serif',
+                fontSmoothing: 'antialiased',
+                '::placeholder': {
+                    color: '#CFD7DF',
+                },
+            },
+            invalid: {
+                color: '#e5424d',
+                ':focus': {
+                    color: '#303238',
+                },
+            },
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        var form = document.getElementById('add_stripe_card');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the customer that there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    $("#card_token").val(result.token.id);
+                    form.submit();
+                }
+            });
+        });
+</script>
+

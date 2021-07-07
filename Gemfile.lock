@@ -110,6 +110,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     ed25519 (1.2.4)
     erubi (1.10.0)
     erubis (2.7.0)
@@ -243,6 +247,7 @@ GEM
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stripe (5.35.0)
     temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
@@ -293,6 +298,7 @@ DEPENDENCIES
   capistrano3-puma
   capybara (>= 3.26)
   devise
+  dotenv-rails
   ed25519 (>= 1.2, < 2.0)
   haml-rails (~> 2.0)
   jbuilder (~> 2.7)
@@ -307,6 +313,7 @@ DEPENDENCIES
   selenium-webdriver
   simple_form
   spring
+  stripe
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
