@@ -1,8 +1,12 @@
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!, :set_stripe_key
+  before_action :authenticate_user!
 
   def index
-    @subscriptions = Stripe::Price.list({limit: 3})
+    begin
+      @subscriptions = Stripe::Price.list({limit: 3})
+    rescue
+      {}
+    end
   end
 
   def create_stripe_card
@@ -36,9 +40,4 @@ class DashboardsController < ApplicationController
     end
   end
 
-  private
-
-  def set_stripe_key
-    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-  end
 end

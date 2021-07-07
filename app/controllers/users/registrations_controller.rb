@@ -1,7 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, only: [:create]
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_stripe_key
 
   # POST /resource
   def create
@@ -11,6 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
+        stripe_customer
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -26,15 +26,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:alert] = resource.errors.full_messages.to_sentence
       respond_with resource
     end
-    stripe_customer
   end
 
   def stripe_customer
-    return if resource.errors&.present?
     customer = Stripe::Customer.create(email:resource.email, name:resource.full_name)
-    resource.stripe_customer_token = customer.id
-    resource.save!
-    flash[:notice] = 'Customer Created successfully'
+    resource.update(stripe_customer_token:customer.id)
   end
 
   protected
