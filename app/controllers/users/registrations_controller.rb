@@ -42,8 +42,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :password, :password_confirmation])
   end
 
-  def set_stripe_key
-    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-  end
-
 end

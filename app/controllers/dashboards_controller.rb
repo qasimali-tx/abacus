@@ -5,7 +5,7 @@ class DashboardsController < ApplicationController
     begin
       @subscriptions = Stripe::Price.list({limit: 3})
     rescue
-      {}
+      []
     end
   end
 
