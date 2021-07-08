@@ -33,7 +33,7 @@ class DashboardsController < ApplicationController
                                                       ]
                                                     })
       else
-        price = JSON.parse(params[:subscription])["unit_amount"]
+        price = JSON.parse(params[:subscription])["unit_amount"].to_i
         @charge=Stripe::Charge.create({
                                 amount: price/100,
                                 customer: current_user.stripe_customer_token,
