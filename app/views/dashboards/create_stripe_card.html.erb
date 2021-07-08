@@ -1,21 +1,21 @@
-<div id="error_div"></div>
-<br>
-<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<div class="container m-top pt-5" style="width: 43rem;">
+  <div class="pb-3">
+    <div id="error_div"></div>
+    <br>
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <h2>Payment Method</h2>
 
-<div class="create-container">
-  <h2>Payment Method</h2>
+    <%= form_tag add_stripe_card_dashboards_path, :method => :post, :id => 'add_stripe_card' do %>
 
-  <%= form_tag add_stripe_card_dashboards_path, :method => :post, :id => 'add_stripe_card' do %>
+      <%= render "dashboards/credit_card_fields" %>
 
-    <%= render "dashboards/credit_card_fields" %>
+      <%= hidden_field(:card, :token) %>
 
-    <%= hidden_field(:card, :token) %>
-
-    <div class="button">
-      <div class="edit" style="margin-top: 20px;">
-        <%= submit_tag "ADD Card", :id => "create-button", :class => "checkout-button", :style => "top: 0px; font-size: 1.6em;margin-right: 15px;" %>
+      <div class="button">
+        <div class="edit" style="margin-top: 20px;">
+          <%= submit_tag "ADD Card", :id => "create-button", :class => "checkout-button", :style => "top: 0px; font-size: 1.6em;margin-right: 15px;" %>
+        </div>
       </div>
-    </div>
-  <% end %>
-
+    <% end %>
+  </div>
 </div>

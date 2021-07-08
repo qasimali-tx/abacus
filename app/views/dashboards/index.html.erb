@@ -1,28 +1,31 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-11"><h1>Abacus Payment System</h1></div>
-    <div class="col-1 " style="padding-top: 7px;">
-      <%=button_to "Sign Out",destroy_user_session_path, :method => :delete %>
-    </div>
-  </div>
-
-  <div class="m-4">
-    <center> <h4>Stripe Payment</h4></center>
-  </div>
-
-  <div class = "row d-flex justify-content-center">
-    <% @subscriptions.data.each do |subscription| %>
-      <div class="card" style="width: 18rem;">
-        <div class="card-body m-4">
-          <h5 class="card-title"><%= subscription_name(subscription["product"]) %></h5>
-          <p class="card-text">Price: <span><%= "#{subscription["unit_amount_decimal"].to_i/100} #{subscription["currency"].upcase}"  %></span></p>
-          <%if subscription["type"] == "recurring" %>
-            <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "recurring"), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
-            <%else%>
-            <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "one_time", subscription: subscription), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
-            <%end %>
-        </div>
-      </div>
-    <%end %>
+<div class="row">
+  <div class="col-11"><h1>Abacus Payment System</h1></div>
+  <div class="col-1 " style="padding-top: 7px;">
+    <%=button_to "Sign Out",destroy_user_session_path, :method => :delete %>
   </div>
 </div>
+<div class="container m-top pt-5" style="width: 43rem;">
+  <div class="pb-3">
+
+      <div class="m-4">
+        <center> <h4>Stripe Payment</h4></center>
+      </div>
+
+      <div class = "row d-flex justify-content-center">
+        <% @subscriptions.data.each do |subscription| %>
+          <div class="card" style="width: 18rem;margin: 10px;">
+            <div class="card-body m-4">
+              <h5 class="card-title"><%= subscription_name(subscription["product"]) %></h5>
+              <p class="card-text">Price: <span><%= "#{subscription["unit_amount_decimal"].to_i/100} #{subscription["currency"].upcase}"  %></span></p>
+              <%if subscription["type"] == "recurring" %>
+                <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "recurring"), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
+              <%else%>
+                <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "one_time", subscription: subscription), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
+              <%end %>
+            </div>
+          </div>
+        <%end %>
+      </div>
+  </div>
+</div>
+

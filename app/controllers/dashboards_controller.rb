@@ -18,7 +18,7 @@ class DashboardsController < ApplicationController
       current_user.stripe_customer_token,
       {source: card_token}
       )
-    current_user.update(default_source: @card.id )
+    current_user.update(default_source: @card.id)
     flash[:notice] = 'Card Created successfully'
     redirect_to root_path
   end
@@ -33,11 +33,11 @@ class DashboardsController < ApplicationController
                                                       ]
                                                     })
       else
-        price = params[:subscription]["unit_amount"].to_i
-        Stripe::Charge.create({
+        price = JSON.parse(params[:subscription])["unit_amount"]
+        @charge=Stripe::Charge.create({
                                 amount: price/100,
+                                customer: current_user.stripe_customer_token,
                                 currency: 'usd',
-                                source: current_user.default_source,
                                 description: 'One Time charge',
                               })
       end
