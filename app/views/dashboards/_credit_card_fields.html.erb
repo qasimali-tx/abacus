@@ -5,7 +5,7 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-        var stripe = Stripe('pk_test_hXRMl76AyqML8W0RAvGrYuog');
+        var stripe = Stripe(<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>);
         var elements = stripe.elements();
 
         // Custom styling can be passed to options when creating an Element.

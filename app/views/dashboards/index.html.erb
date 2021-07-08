@@ -16,10 +16,10 @@
         <div class="card-body m-4">
           <h5 class="card-title"><%= subscription_name(subscription["product"]) %></h5>
           <p class="card-text">Price: <span><%= "#{subscription["unit_amount_decimal"].to_i/100} #{subscription["currency"].upcase}"  %></span></p>
-          <%if current_user.default_source.present? %>
-            <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(subscription["id"]), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
+          <%if subscription["type"] == "recurring" %>
+            <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "recurring"), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
             <%else%>
-            <%=link_to "Subscribe",create_stripe_card_dashboards_url, :class=> "btn btn-primary", :method=> 'get' %>
+            <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "one_time", subscription: subscription), :class=> "btn btn-primary #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
             <%end %>
         </div>
       </div>

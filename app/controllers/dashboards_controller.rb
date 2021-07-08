@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :check_default_source, only: [:create_subscription]
   def index
     begin
       @subscriptions = Stripe::Price.list({limit: 3})
@@ -25,12 +25,22 @@ class DashboardsController < ApplicationController
 
   def create_subscription
     begin
-      @subscription = Stripe::Subscription.create({
-                                                    customer: current_user.stripe_customer_token,
-                                                    items: [
-                                                      {price: params[:id]},
-                                                    ]
-                                                  })
+      if params[:type] == "recurring"
+        Stripe::Subscription.create({
+                                                      customer: current_user.stripe_customer_token,
+                                                      items: [
+                                                        {price: params[:id]},
+                                                      ]
+                                                    })
+      else
+        price = params[:subscription]["unit_amount"].to_i
+        Stripe::Charge.create({
+                                amount: price/100,
+                                currency: 'usd',
+                                source: current_user.default_source,
+                                description: 'One Time charge',
+                              })
+      end
       current_user.update(subscription_id: params[:id])
       flash[:notice] = 'Subscription Created successfully'
       redirect_to root_path
@@ -40,4 +50,9 @@ class DashboardsController < ApplicationController
     end
   end
 
+  def check_default_source
+    if current_user.default_source.nil?
+      redirect_to create_stripe_card_dashboards_url
+    end
+  end
 end
