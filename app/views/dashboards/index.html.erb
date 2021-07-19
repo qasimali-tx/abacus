@@ -4,9 +4,9 @@
     <%=button_to "Sign Out",destroy_user_session_path, :method => :delete %>
   </div>
 </div>
+
 <div class="container m-top pt-5" style="width: 43rem;">
   <div class="pb-3">
-
       <div class="m-4">
         <center> <h4>Stripe Payment</h4></center>
       </div>
@@ -26,6 +26,15 @@
           </div>
         <%end %>
       </div>
-  </div>
+    </div>
 </div>
 
+<div class="row ">
+  <div class="col-4">
+    <%=link_to "Fast link",fast_link_provider_dashboards_path, :class=> "btn btn-primary" %>
+  </div>
+
+  <div class="col-4">
+    <%=link_to "Transaction History",transaction_history_dashboards_path, :class=> "btn btn-primary" %>
+  </div>
+</div>
