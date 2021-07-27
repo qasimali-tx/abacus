@@ -10,8 +10,6 @@ Rails.application.routes.draw do
       get :create_stripe_card
       post :add_stripe_card
       get :attach_yodlee_account
-      get :get_login_name
-      post :update_yodlee_login_name
       get :fast_link_provider
       get :transaction_history
     end

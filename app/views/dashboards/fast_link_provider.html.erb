@@ -10,6 +10,7 @@
 
 <script>
     var yodlee_account_token = $('#field_name').val();
+    var url = "<%= ENV["FAST_LINK_KEY"] %>";
     (function (window) {
         //Open FastLink
         var fastlinkBtn = document.getElementById('btn-fastlink');
@@ -17,7 +18,7 @@
             'click',
             function() {
                 window.fastlink.open({
-                        fastLinkURL: 'https://fl4.sandbox.yodlee.com/authenticate/restserver/fastlink',
+                        fastLinkURL: url,
                         accessToken: 'Bearer '+yodlee_account_token,
                         params: {
                             configName : 'Aggregation'

@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_default_source, only: [:create_subscription]
   before_action :check_login_name , only:[:transaction_history, :fast_link_provider]
-  before_action :get_auth_token , only:[:transaction_history, :fast_link_provider]
+  before_action :yodlee_user_token , only:[:transaction_history, :fast_link_provider]
   def index
     begin
       @subscriptions = Stripe::Price.list({limit: 3})
@@ -57,20 +57,12 @@ class DashboardsController < ApplicationController
 
   end
 
-  def get_login_name
-  end
-
-  def update_yodlee_login_name
-    current_user.update(yodlee_login_name: params[:loginName])
-    redirect_to root_path
-  end
-
   def transaction_history
     token = current_user.yodlee_account_token
     require "uri"
     require "net/http"
 
-    url = URI("https://sandbox.api.yodlee.com/ysl/transactions")
+    url = URI("#{ENV["BASE_URL"]}/transactions")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
@@ -91,8 +83,6 @@ class DashboardsController < ApplicationController
     end
   end
   def check_login_name
-    if current_user.yodlee_login_name.nil?
-      redirect_to get_login_name_dashboards_path
-    end
+    return unless current_user.yodlee_login_name.nil?
   end
 end

@@ -9,15 +9,16 @@
     <th>Description</th>
     <th> Transaction Date</th>
   </tr>
-
-  <% @transactions.each do |transaction| %>
-    <tr>
-      <td><%= transaction["id"] %></td>
-      <td><%= transaction["amount"]["amount"]%><%=transaction["amount"]["currency"] %></td>
-      <td><%= transaction["category"] %></td>
-      <td><%= transaction["categoryType"] %></td>
-      <td><%= transaction["description"]["original"] %></td>
-      <td><%= transaction["transactionDate"] %></td>
-    </tr>
-  <% end %>
+  <% if @transactions.present?  %>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction["id"] %></td>
+        <td><%= transaction["amount"]["amount"]%><%=transaction["amount"]["currency"] %></td>
+        <td><%= transaction["category"] %></td>
+        <td><%= transaction["categoryType"] %></td>
+        <td><%= transaction["description"]["original"] %></td>
+        <td><%= transaction["transactionDate"] %></td>
+      </tr>
+    <% end %>
+  <%end %>
 </table>
