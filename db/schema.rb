@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2021_07_05_082852) do
     t.string "stripe_customer_token"
     t.string "default_source"
     t.string "subscription_id"
+    t.string "yodlee_account_token"
+    t.string "yodlee_login_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

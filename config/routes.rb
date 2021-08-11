@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     collection do
       get :create_stripe_card
       post :add_stripe_card
+      get :attach_yodlee_account
+      get :fast_link_provider
+      get :transaction_history
     end
   end
 end

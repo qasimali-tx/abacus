@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include ApplicationHelper
   before_action :configure_permitted_parameters, only: [:create]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -11,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.persisted?
       if resource.active_for_authentication?
         stripe_customer
+        yodlee_user
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -31,6 +33,36 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def stripe_customer
     customer = Stripe::Customer.create(email:resource.email, name:resource.full_name)
     resource.update(stripe_customer_token:customer.id)
+  end
+
+  def yodlee_user
+    require "uri"
+    require "net/http"
+    token = get_yodlee_admin_token
+    url = URI("#{ENV["BASE_URL"]}/user/register")
+
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    request["Api-Version"] = "1.1"
+    request["Authorization"] = "Bearer "+token
+    request["Content-Type"] = "application/json"
+    raw_data = {
+      "user": {
+        "loginName": "#{resource.first_name}.#{resource.last_name}.#{SecureRandom.hex(4)}",
+        "email": resource.email,
+        "name": {
+          "first": resource.first_name,
+          "last": resource.last_name
+        }
+      }
+    }
+    request.body = raw_data.to_json
+    response = https.request(request)
+    response.read_body
+    yodleelogInName=JSON.parse(response.read_body)["user"]["loginName"]
+    resource.update(yodlee_login_name:yodleelogInName)
   end
 
   protected

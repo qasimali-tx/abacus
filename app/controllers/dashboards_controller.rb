@@ -1,6 +1,9 @@
 class DashboardsController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_user!
   before_action :check_default_source, only: [:create_subscription]
+  before_action :check_login_name , only:[:transaction_history, :fast_link_provider]
+  before_action :yodlee_user_token , only:[:transaction_history, :fast_link_provider]
   def index
     begin
       @subscriptions = Stripe::Price.list({limit: 3})
@@ -27,7 +30,7 @@ class DashboardsController < ApplicationController
     begin
       if params[:type] == "recurring"
         Stripe::Subscription.create({
-                                                      customer: current_user.stripe_customer_token,
+                                      customer: current_user.stripe_customer_token,
                                                       items: [
                                                         {price: params[:id]},
                                                       ]
@@ -50,9 +53,36 @@ class DashboardsController < ApplicationController
     end
   end
 
+  def fast_link_provider
+
+  end
+
+  def transaction_history
+    token = current_user.yodlee_account_token
+    require "uri"
+    require "net/http"
+
+    url = URI("#{ENV["BASE_URL"]}/transactions")
+
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+    request["Api-Version"] = "1.1"
+    request["Content-Type"] = "application/x-www-form-urlencoded"
+    request["Authorization"] = "Bearer "+token
+
+    response = https.request(request)
+    @response = response.read_body
+    @transactions=JSON.parse(@response)["transaction"]
+  end
+
   def check_default_source
     if current_user.default_source.nil?
       redirect_to create_stripe_card_dashboards_url
     end
+  end
+  def check_login_name
+    return unless current_user.yodlee_login_name.nil?
   end
 end
