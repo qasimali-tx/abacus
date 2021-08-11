@@ -17,13 +17,18 @@ class DashboardsController < ApplicationController
 
   def add_stripe_card
     card_token = params[:card][:token]
-    @card = Stripe::Customer.create_source(
-      current_user.stripe_customer_token,
-      {source: card_token}
+    begin
+      @card = Stripe::Customer.create_source(
+        current_user.stripe_customer_token,
+        {source: card_token}
       )
-    current_user.update(default_source: @card.id)
-    flash[:notice] = 'Card Created successfully'
-    redirect_to root_path
+      current_user.update(default_source: @card.id)
+      flash[:notice] = 'Card Created successfully'
+      redirect_to root_path
+    rescue => e
+      flash[:notice] = e.message
+      redirect_to root_path
+    end
   end
 
   def create_subscription
