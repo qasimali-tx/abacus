@@ -50,7 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     request["Content-Type"] = "application/json"
     raw_data = {
       "user": {
-        "loginName": "#{resource.first_name}.#{resource.last_name}.#{SecureRandom.hex(4)}",
+        "loginName": "#{SecureRandom.hex(8)}",
         "email": resource.email,
         "name": {
           "first": resource.first_name,
