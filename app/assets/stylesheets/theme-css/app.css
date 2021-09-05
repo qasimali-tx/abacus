@@ -8553,7 +8553,7 @@ input.add-file-input {
 }
 
 .account-body.accountbg {
-  background-image: url("../images/auth-bg.png");
+  background-image: url("/assets/auth-bg.png");
   background-position: center center;
   background-size: cover;
   background-repeat: repeat;

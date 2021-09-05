@@ -13,15 +13,30 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script src="https://js.stripe.com/v3/"></script>
+  <script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v4/initialize.js'></script>
 </head>
 
 <body class="<%= "#{controller_name}_#{action_name}" %>">
-<%= yield %>
+<% unless request.path_info.include?('sign_up') || request.path_info.include?('sign_in') || request.path_info.include?('/password/new') %>
+  <%= render :partial => "layouts/sidebar" %>
+<% end %>
+<div class="page-wrapper">
+  <% unless request.path_info.include?('sign_up') || request.path_info.include?('sign_in')  || request.path_info.include?('/password/new')%>
+    <%= render :partial => "layouts/header" %>
+  <% end %>
+  <div class="page-content">
+    <div class="container-fluid">
+      <%= yield %>
 
-<div class="notification <%= 'success show' if notice %> <%= 'error show' if alert %>">
-  <%= notice %>
-  <%= alert %>
+      <div class="notification <%= 'success show' if notice %> <%= 'error show' if alert %>">
+        <%= notice %>
+        <%= alert %>
+      </div>
+    </div>
+    <% unless request.path_info.include?('sign_up') || request.path_info.include?('sign_in')  || request.path_info.include?('/password/new')%>
+      <%= render :partial => "layouts/footer" %>
+    <% end %>
+  </div>
 </div>
-
 </body>
 </html>

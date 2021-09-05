@@ -5,6 +5,9 @@ class DashboardsController < ApplicationController
   before_action :check_login_name , only:[:transaction_history, :fast_link_provider]
   before_action :yodlee_user_token , only:[:transaction_history, :fast_link_provider]
   def index
+  end
+
+  def subscriptions
     begin
       @subscriptions = Stripe::Price.list({limit: 3})
     rescue

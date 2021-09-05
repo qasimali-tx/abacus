@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :create_subscription
     end
     collection do
+      get :subscriptions
       get :create_stripe_card
       post :add_stripe_card
       get :attach_yodlee_account

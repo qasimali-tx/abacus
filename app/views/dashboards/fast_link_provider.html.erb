@@ -1,14 +1,13 @@
-<script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v4/initialize.js'></script>
-
 <div id="container-fastlink">
   <div style="text-align: center;">
 
     <%= hidden_field_tag :field_name, "#{current_user.yodlee_account_token}", :id => 'field_name' %>
-    <input type="submit" id="btn-fastlink" value="Link an Account">
+    <input type="submit" id="btn-fastlink" class="btn btn-dark py-2 px-5 font-16 " value="Link an Account">
   </div>
 </div>
 
 <script>
+    $(document).on('turbolinks:load', function() {
     var yodlee_account_token = $('#field_name').val();
     var url = "<%= ENV["FAST_LINK_KEY"] %>";
     (function (window) {
@@ -45,4 +44,5 @@
             },
             false);
     }(window));
+    });
 </script>

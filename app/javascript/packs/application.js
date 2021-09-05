@@ -26,7 +26,7 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function() {
   function initDateRangrPicker() {
     if ($('#Dash_Date').length == 0) {
       return;
