@@ -6,6 +6,7 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
+import $ from 'jquery'
 import "channels"
 
 require("turbolinks").start()
@@ -17,6 +18,7 @@ require("bootstrap");
 require("metismenu");
 import * as Waves from "./theme-js/waves"
 import * as feather from "./theme-js/feather.min";
+
 require("simplebar");
 import * as moment from "moment";
 require("./theme-js/daterangepicker/daterangepicker");
