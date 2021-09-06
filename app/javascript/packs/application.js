@@ -428,4 +428,5 @@ $(document).on('turbolinks:load', function() {
 
   var chart = new ApexCharts(document.querySelector("#barchart"), options);
   chart.render();
+  $(".alert").delay(5000).slideUp(300);
 })
