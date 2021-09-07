@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import $ from 'jquery'
 import "channels"
+import Inputmask from "inputmask";
 
 require("turbolinks").start()
 require("jquery");
@@ -428,5 +429,9 @@ $(document).on('turbolinks:load', function() {
 
   var chart = new ApexCharts(document.querySelector("#barchart"), options);
   chart.render();
-  $(".alert").delay(5000).slideUp(300);
+  $(".notification").fadeOut(6000);
+  Inputmask({"mask": "9999 9999 9999 9999"}).mask($('#card_number'));
+  Inputmask({"mask": "99/99"}).mask($("#exp_date"));
+  Inputmask({"mask": "9999"}).mask($("#cvc"));
+  Inputmask({"mask": "999999"}).mask($('#postal'));
 })
