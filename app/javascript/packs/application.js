@@ -318,8 +318,7 @@ $(document).on('turbolinks:load', function() {
       height: 350,
       type: 'line',
       toolbar: {
-        show: false,
-        autoSelected: 'zoom'
+        show: false
       },
     },
     stroke: {
