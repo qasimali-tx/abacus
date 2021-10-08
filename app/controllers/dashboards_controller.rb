@@ -34,6 +34,10 @@ class DashboardsController < ApplicationController
     end
   end
 
+  def files
+
+  end
+
   def create_subscription
     begin
       if params[:type] == "recurring"

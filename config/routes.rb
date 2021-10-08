@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get :attach_yodlee_account
       get :fast_link_provider
       get :transaction_history
+      get :files
     end
   end
 end
