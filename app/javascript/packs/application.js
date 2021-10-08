@@ -262,79 +262,40 @@ $(document).on('turbolinks:load', function() {
   }
 
   var chart = new ApexCharts(
-    document.querySelector("#ana_dash_1"),
-    options
+      document.querySelector("#ana_dash_1"),
+      options
   );
 
   chart.render();
 
 
+  var colors = ['#98e7df', '#b8c4d0', '#bec7fa', '#ffe2a3', '#92e6f0'];
 
   var options = {
+    series: [44, 55, 13, 43, 22],
     chart: {
-      height: 270,
-      type: 'donut',
+      width: 380,
+      type: 'pie',
     },
-    plotOptions: {
-      pie: {
-        donut: {
-          size: '85%'
-        }
-      }
-    },
-    dataLabels: {
-      enabled: false,
-    },
-
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ['transparent']
-    },
-
-    series: [50, 25, 25, ],
-    legend: {
-      show: true,
-      position: 'bottom',
-      horizontalAlign: 'center',
-      verticalAlign: 'middle',
-      floating: false,
-      fontSize: '13px',
-      offsetX: 0,
-      offsetY: 0,
-    },
-    labels: ["Mobile", "Tablet", "Desktop"],
-    colors: ["#2a76f4", "rgba(42, 118, 244, .5)", "rgba(42, 118, 244, .18)"],
-
+    colors: colors,
+    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
     responsive: [{
-      breakpoint: 600,
+      breakpoint: 480,
       options: {
-        plotOptions: {
-          donut: {
-            customScale: 0.2
-          }
-        },
         chart: {
-          height: 240
+          width: 200
         },
         legend: {
-          show: false
-        },
-      }
-    }],
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return val + " %"
+          position: 'bottom'
         }
       }
-    }
+    }]
+  };
 
-  }
 
   var chart = new ApexCharts(
-    document.querySelector("#ana_device"),
-    options
+      document.querySelector("#ana_device"),
+      options
   );
 
   chart.render();
@@ -345,88 +306,48 @@ $(document).on('turbolinks:load', function() {
   var colors = ['#98e7df', '#b8c4d0', '#bec7fa', '#ffe2a3', '#92e6f0'];
   var options = {
     series: [{
-      name: 'Inflation',
-      data: [4.0, 10.1, 6.0, 8.0, 9.1]
+      name: 'Website Blog',
+      type: 'column',
+      data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+    }, {
+      name: 'Social Media',
+      type: 'line',
+      data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
     }],
     chart: {
-      height: 355,
-      type: 'bar',
+      height: 350,
+      type: 'line',
       toolbar: {
-        show: false
+        show: false,
+        autoSelected: 'zoom'
       },
     },
-    plotOptions: {
-      bar: {
-        dataLabels: {
-          position: 'top', // top, center, bottom              
-        },
-        columnWidth: '20',
-        distributed: true,
-      },
-
+    stroke: {
+      width: [0, 4]
+    },
+    title: {
+      text: 'Traffic Sources'
     },
     dataLabels: {
       enabled: true,
-      formatter: function (val) {
-        return val + "%";
-      },
-      offsetY: -20,
-      style: {
-        fontSize: '12px',
-        colors: ["#000"]
-      }
+      enabledOnSeries: [1]
     },
-    colors: colors,
+    labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
     xaxis: {
-      categories: ["Email", "Referral", "Organic", "Direct", "Campaign", ],
-      position: 'top',
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false
-      },
-      crosshairs: {
-        fill: {
-          type: 'gradient',
-          gradient: {
-            colorFrom: '#D8E3F0',
-            colorTo: '#BED1E6',
-            stops: [0, 100],
-            opacityFrom: 0.4,
-            opacityTo: 0.5,
-          }
-        }
-      },
-      tooltip: {
-        enabled: true,
-      },
+      type: 'datetime'
     },
+    yaxis: [{
+      title: {
+        text: 'Website Blog',
+      },
 
-    grid: {
-      padding: {
-        left: 0,
-        right: 0
-      },
-      strokeDashArray: 3,
-    },
-    yaxis: {
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false,
-      },
-      labels: {
-        show: false,
-        formatter: function (val) {
-          return val + "%";
-        }
+    }, {
+      opposite: true,
+      title: {
+        text: 'Social Media'
       }
-
-    },
+    }]
   };
-
   var chart = new ApexCharts(document.querySelector("#barchart"), options);
   chart.render();
   $(".notification").fadeOut(6000);
