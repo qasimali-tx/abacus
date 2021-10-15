@@ -43,18 +43,18 @@ class DashboardsController < ApplicationController
       if params[:type] == "recurring"
         Stripe::Subscription.create({
                                       customer: current_user.stripe_customer_token,
-                                                      items: [
-                                                        {price: params[:id]},
-                                                      ]
-                                                    })
+                                      items: [
+                                        {price: params[:id]},
+                                      ]
+                                    })
       else
         price = JSON.parse(params[:subscription])["unit_amount"].to_i
         @charge=Stripe::Charge.create({
-                                amount: price/100,
-                                customer: current_user.stripe_customer_token,
-                                currency: 'usd',
-                                description: 'One Time charge',
-                              })
+                                        amount: price/100,
+                                        customer: current_user.stripe_customer_token,
+                                        currency: 'usd',
+                                        description: 'One Time charge',
+                                      })
       end
       current_user.update(subscription_id: params[:id])
       flash[:notice] = 'Subscription Created successfully'
@@ -69,24 +69,18 @@ class DashboardsController < ApplicationController
 
   end
 
+  def get_bank_account
+    dataArray = params[:dataArray]["0"]
+    if dataArray.present?
+      @account = Account.create(provider_id: dataArray[:providerId], provider_name: dataArray[:providerName],
+                                status: dataArray[:status], provider_account_id: dataArray[:providerAccountId],
+                                account_type: params[:account_type], user_id: current_user.id)
+    end
+    render js: "window.location = '#{root_path}'"
+  end
+
   def transaction_history
-    token = current_user.yodlee_account_token
-    require "uri"
-    require "net/http"
-
-    url = URI("#{ENV["BASE_URL"]}/transactions")
-
-    https = Net::HTTP.new(url.host, url.port)
-    https.use_ssl = true
-
-    request = Net::HTTP::Get.new(url)
-    request["Api-Version"] = "1.1"
-    request["Content-Type"] = "application/x-www-form-urlencoded"
-    request["Authorization"] = "Bearer "+token
-
-    response = https.request(request)
-    @response = response.read_body
-    @transactions=JSON.parse(@response)["transaction"]
+      @transactions = Transaction.all
   end
 
   def check_default_source
