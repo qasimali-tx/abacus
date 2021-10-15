@@ -80,7 +80,7 @@ class DashboardsController < ApplicationController
   end
 
   def transaction_history
-      @transactions = Transaction.all
+    @transactions = Transaction.joins(:account).where("account.user_id" => current_user.id)
   end
 
   def check_default_source

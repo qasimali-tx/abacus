@@ -8,7 +8,7 @@ set :environment, "development"
 set :output, "log/cron.log"
 # set :bundle_command, "/home/southville-solutions/.rbenv/shims/bundle exec"
 set :bundle_command, "/home/deploy/.rbenv/shims/bundle exec"
-every 1.minutes do
+every 1.hour do
   rake 'account_data:fetch_account_details'
 end
 
