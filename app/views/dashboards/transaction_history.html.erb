@@ -38,18 +38,18 @@
               </tr>
               </thead>
               <tbody>
-              <% if @transactions.present?  %>
+              <% if @transactions.present? %>
                 <% @transactions.each do |transaction| %>
-              <tr>
-                <th><%= transaction["id"] %></th>
-                <th><%= transaction["amount"]["amount"]%><%=transaction["amount"]["currency"] %></th>
-                <th><%= transaction["category"] %></th>
-                <th><%= transaction["categoryType"] %></th>
-                <th><%= transaction["description"]["original"] %></th>
-                <th><%= transaction["transactionDate"] %></th>
-              </tr>
+                  <tr>
+                    <th><%= transaction.id %></th>
+                    <th><%= transaction.amount %> <%= transaction.currency %></th>
+                    <th><%= transaction.category %></th>
+                    <th><%= transaction.category_type %></th>
+                    <th><%= transaction.description %></th>
+                    <th><%= transaction.transaction_date %></th>
+                  </tr>
                 <% end %>
-              <%end %>
+              <% end %>
               </tbody>
             </table>
           </div>
