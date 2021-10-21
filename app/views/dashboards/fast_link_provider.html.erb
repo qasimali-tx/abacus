@@ -1,14 +1,18 @@
-<script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v4/initialize.js'></script>
-
 <div id="container-fastlink">
-  <div style="text-align: center;">
+  <div style="text-align: center;" class="selection">
 
     <%= hidden_field_tag :field_name, "#{current_user.yodlee_account_token}", :id => 'field_name' %>
-    <input type="submit" id="btn-fastlink" value="Link an Account">
+<!--    <input type="submit" id="btn-fastlink" class="btn btn-dark py-2 px-5 font-16 mt-3" value="Link an Account">-->
+    <select id="btn-fastlink" class="btn btn-dark py-2 font-16 mt-3">
+      <option value="personal" class="btn btn-dark py-2 font-16 mt-3">Personal</option>
+      <option value="business" class="btn btn-dark py-2 font-16 mt-3">Business</option>
+    </select>
+
   </div>
 </div>
 
 <script>
+    $(document).on('turbolinks:load', function() {
     var yodlee_account_token = $('#field_name').val();
     var url = "<%= ENV["FAST_LINK_KEY"] %>";
     (function (window) {
@@ -17,6 +21,7 @@
         fastlinkBtn.addEventListener(
             'click',
             function() {
+
                 window.fastlink.open({
                         fastLinkURL: url,
                         accessToken: 'Bearer '+yodlee_account_token,
@@ -32,10 +37,16 @@
                             console.log(data);
                         },
                         onClose: function (data) {
-                            window.location.href = "/";
-                            // will be called called to close FastLink. For list of possible message, refer to onClose(data) Method.
-                            console.log(data);
-                        },
+                            var account_detail = Object.values(data)
+                            var accountType =document.getElementById("btn-fastlink").value;
+                            if ( account_detail[2].length !== 0  ){
+                            $.ajax({
+                                type: "post",
+                                url: "/dashboards/get_bank_account",
+                                data: {dataArray: account_detail[2], account_type: accountType}
+                            });
+                                }
+                            },
                         onEvent: function (data) {
                             // will be called on intermittent status update.
                             console.log(data);
@@ -44,5 +55,9 @@
                     'container-fastlink');
             },
             false);
+        $( ".selection" ).click(function() {
+            $( ".selection" ).hide();
+        });
     }(window));
+    });
 </script>

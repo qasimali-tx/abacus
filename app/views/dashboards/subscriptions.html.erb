@@ -1,0 +1,49 @@
+<!-- Page-Title -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-title-box">
+      <div class="row">
+        <div class="col">
+          <h4 class="page-title">Pricings</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Subscription Plans</a></li>
+            <li class="breadcrumb-item active">Pricings</li>
+          </ol>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end page-title-box-->
+  </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="row">
+  <% @subscriptions.data.each do |subscription| %>
+    <div class="col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="pricingTable1 text-center">
+            <h6 class="title1 pt-3 pb-2 m-0"><%= subscription_name(subscription["product"]) %></h6>
+            <p class="text-muted p-3 mb-0">It is a long established fact that a reader will be distracted by the readable.</p>
+            <div class="p-3">
+              <h3 class="amount amount-border d-inline-block">$<%= "#{subscription["unit_amount_decimal"].to_i/100} #{subscription["currency"].upcase}"  %></h3>
+              <%if subscription["type"] == "recurring" %>
+                <small class="font-12 text-muted">/month</small>
+              <% end %>
+            </div>
+            <hr class="hr-dashed">
+            <ul class="list-unstyled pricing-content-2 text-left py-3 border-0 mb-0">
+              <li>Connect Unlimited Bank Accounts</li>
+              <li>Track Transaction History</li>
+              <li>Email Notifications</li>
+            </ul>
+            <%if subscription["type"] == "recurring" %>
+              <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "recurring"), :class=> "btn btn-dark py-2 px-5 font-16 #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
+            <%else%>
+              <%=link_to "#{current_user.subscription_id == subscription["id"] ? "Subscribed" : "Subscribe"}",create_subscription_dashboard_url(id: subscription["id"], type: "one_time", subscription: subscription), :class=> "btn btn-dark py-2 px-5 font-16 #{current_user.subscription_id == subscription["id"] ? "disabled" : ""}" %>
+            <%end %>
+          </div><!--end pricingTable-->
+        </div><!--end card-body-->
+      </div> <!--end card-->
+    </div><!--end col-->
+  <% end %>
+</div><!--end row-->

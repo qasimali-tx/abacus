@@ -2,15 +2,18 @@ namespace :account_data do
 task fetch_account_details: :environment do
   require "uri"
   require "net/http"
+
   date = Time.now - 1.year
   from_date = date.strftime("%F")
   url = URI("#{ENV["BASE_URL"]}/transactions?fromDate=#{from_date}")
+
 
   https = Net::HTTP.new(url.host, url.port)
   https.use_ssl = true
   request = Net::HTTP::Get.new(url)
   request["Api-Version"] = "1.1"
   request["Content-Type"] = "application/x-www-form-urlencoded"
+
   accounts = Account.all
   accounts.each do |account|
     user = account.user
