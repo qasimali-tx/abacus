@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-title-box">
+      <div class="row">
+        <div class="col">
+          <h4 class="page-title">Accounts</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Account History</a></li>
+            <li class="breadcrumb-item active">Accounts</li>
+          </ol>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end page-title-box-->
+  </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-rep-plugin">
+          <div class="table-responsive mb-0" data-pattern="priority-columns">
+            <table id="tech-companies-1" class="table table-striped mb-0">
+              <thead>
+              <tr>
+                <th data-priority="1">UserName</th>
+                <th data-priority="1">Account ID</th>
+                <th data-priority="1">Provider ID</th>
+                <th data-priority="3">Provider Name</th>
+                <th data-priority="1">Provider Account ID</th>
+                <th data-priority="3">Account Type</th>
+                <th data-priority="3">Status</th>
+              </tr>
+              </thead>
+              <tbody>
+                <% @accounts.each do |account| %>
+                  <tr>
+                    <th><%= account.user.first_name %></th>
+                    <th><%= account.id %></th>
+                    <th><%= account.provider_id %></th>
+                    <th><%= account.provider_name %></th>
+                    <th><%= account.provider_account_id %></th>
+                    <th><%= account.account_type %></th>
+                    <th><%= account.status %></th>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!--end card-body-->
+    </div><!--end card-->
+  </div> <!-- end col -->
+</div> <!-- end row -->

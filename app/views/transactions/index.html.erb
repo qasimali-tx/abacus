@@ -29,6 +29,7 @@
             <table id="tech-companies-1" class="table table-striped mb-0">
               <thead>
               <tr>
+                <th>Account ID</th>
                 <th>ID</th>
                 <th data-priority="1">Amount with currency</th>
                 <th data-priority="3">Category</th>
@@ -38,9 +39,9 @@
               </tr>
               </thead>
               <tbody>
-              <% if @transactions.present? %>
                 <% @transactions.each do |transaction| %>
                   <tr>
+                    <th><%= transaction.account_id %></th>
                     <th><%= transaction.id %></th>
                     <th><%= transaction.amount %> <%= transaction.currency %></th>
                     <th><%= transaction.category %></th>
@@ -49,7 +50,6 @@
                     <th><%= transaction.transaction_date %></th>
                   </tr>
                 <% end %>
-              <% end %>
               </tbody>
             </table>
           </div>

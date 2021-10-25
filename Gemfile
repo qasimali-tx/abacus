@@ -32,7 +32,7 @@ gem 'pundit'
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'rexml'
-
+gem "rolify"
 gem 'stripe'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'whenever', '~> 1.0'

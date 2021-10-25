@@ -18,4 +18,6 @@ Rails.application.routes.draw do
       post 'get_bank_account'
     end
   end
+  resources :accounts
+  resources :transactions
 end

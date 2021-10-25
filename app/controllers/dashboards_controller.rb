@@ -79,10 +79,6 @@ class DashboardsController < ApplicationController
     render js: "window.location = '#{root_path}'"
   end
 
-  def transaction_history
-    @transactions = Transaction.joins(:account).where("account.user_id" => current_user.id)
-  end
-
   def check_default_source
     if current_user.default_source.nil?
       redirect_to create_stripe_card_dashboards_url
