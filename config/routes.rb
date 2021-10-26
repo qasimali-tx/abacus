@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :fast_link_provider
       get :transaction_history
       get :files
+      get :upload_files
       post 'get_bank_account'
     end
   end

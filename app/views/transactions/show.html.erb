@@ -7,8 +7,8 @@
           <h4 class="page-title">Transactions</h4>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Transaction History</a></li>
-            <li class="breadcrumb-item active">Transactions</li>
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Account</a></li>
+            <li class="breadcrumb-item active">Transactions History</li>
           </ol>
         </div><!--end col-->
       </div><!--end row-->
@@ -38,17 +38,17 @@
               </tr>
               </thead>
               <tbody>
-                <% @transactions.each do |transaction| %>
-                  <tr>
-                    <th><%= transaction.account_id %></th>
-                    <th><%= transaction.id %></th>
-                    <th><%= transaction.amount %> <%= transaction.currency %></th>
-                    <th><%= transaction.category %></th>
-                    <th><%= transaction.category_type %></th>
-                    <th><%= transaction.description %></th>
-                    <th><%= transaction.transaction_date %></th>
-                  </tr>
-                <% end %>
+              <% @transaction.each do |transaction| %>
+                <tr>
+                  <th><%= transaction.account_id %></th>
+                  <th><%= transaction.id %></th>
+                  <th><%= transaction.amount %> <%= transaction.currency %></th>
+                  <th><%= transaction.category %></th>
+                  <th><%= transaction.category_type %></th>
+                  <th><%= transaction.description %></th>
+                  <th><%= transaction.transaction_date %></th>
+                </tr>
+              <% end %>
               </tbody>
             </table>
           </div>

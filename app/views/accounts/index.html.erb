@@ -20,8 +20,7 @@
     <div class="card">
       <div class="card-body">
         <div class="table-rep-plugin">
-          <div class="table-responsive mb-0" data-pattern="priority-columns">
-            <table id="tech-companies-1" class="table table-striped mb-0">
+            <table class="table table-striped mb-0 myTable">
               <thead>
               <tr>
                 <th data-priority="1">UserName</th>
@@ -31,6 +30,7 @@
                 <th data-priority="1">Provider Account ID</th>
                 <th data-priority="3">Account Type</th>
                 <th data-priority="3">Status</th>
+                <th data-priority="3">Transactions</th>
               </tr>
               </thead>
               <tbody>
@@ -43,13 +43,13 @@
                     <th><%= account.provider_account_id %></th>
                     <th><%= account.account_type %></th>
                     <th><%= account.status %></th>
+                    <th><%= link_to 'View Transaction' , transaction_path(account), class: 'btn btn-secondary btn-sm' %></th>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           </div>
         </div>
-      </div><!--end card-body-->
     </div><!--end card-->
   </div> <!-- end col -->
 </div> <!-- end row -->
