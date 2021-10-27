@@ -17,7 +17,6 @@
 <!-- end page title end breadcrumb -->
 <div class="row">
   <div class="col-12">
-    <button class="btn btn-secondary btn-sm download-btn">Download</button>
     <div class="card">
       <div class="card-body">
         <div class="table-rep-plugin">
@@ -28,38 +27,35 @@
               <th data-priority="1">File Name</th>
               <th data-priority="1">File Type</th>
               <th data-priority="3">Uploaded Date</th>
+              <th data-priority="3"></th>
+              <th data-priority="3"></th>
+
             </tr>
             </thead>
             <tbody>
             <tr>
-            <th data-priority="1"><%= current_user.full_name %></th>
-            <th data-priority="1">ABC</th>
-            <th data-priority="1">PDF</th>
-            <th data-priority="3"><%= Time.now %></th>
-            </tr>
-            <tr>
               <th data-priority="1"><%= current_user.full_name %></th>
               <th data-priority="1">ABC</th>
-              <th data-priority="1">JPG</th>
+              <th data-priority="1">PDF</th>
               <th data-priority="3"><%= Time.now %></th>
-            </tr>
-            <tr>
-              <th data-priority="1"><%= current_user.full_name %></th>
-              <th data-priority="1">ABC</th>
-              <th data-priority="1">PNG</th>
-              <th data-priority="3"><%= Time.now %></th>
+              <th><button class="btn btn-secondary btn-sm">View</button></th>
+              <th><button class="btn btn-secondary btn-sm">Download</button></th>
             </tr>
             <tr>
               <th data-priority="1"><%= current_user.full_name %></th>
               <th data-priority="1">ABC</th>
               <th data-priority="1">PDF</th>
               <th data-priority="3"><%= Time.now %></th>
+              <th><button class="btn btn-secondary btn-sm">View</button></th>
+              <th><button class="btn btn-secondary btn-sm">Download</button></th>
             </tr>
             <tr>
               <th data-priority="1"><%= current_user.full_name %></th>
               <th data-priority="1">ABC</th>
-              <th data-priority="1">JPEG</th>
+              <th data-priority="1">PDF</th>
               <th data-priority="3"><%= Time.now %></th>
+              <th><button class="btn btn-secondary btn-sm">View</button></th>
+              <th><button class="btn btn-secondary btn-sm">Download</button></th>
             </tr>
             </tbody>
           </table>
