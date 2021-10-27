@@ -76,10 +76,7 @@ $(document).on('turbolinks:load', function() {
 
     cb(start, end, '');
   }
-  $('.myTable').DataTable(
-      {
-    buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
-  });
+  $('.myTable').DataTable();
 
   function initMetisMenu() {
     //metis menu
