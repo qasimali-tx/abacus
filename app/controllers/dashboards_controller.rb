@@ -15,9 +15,6 @@ class DashboardsController < ApplicationController
     end
   end
 
-  def upload_files
-
-  end
   def create_stripe_card
   end
 
