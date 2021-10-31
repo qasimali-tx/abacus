@@ -1,0 +1,58 @@
+<!-- Page-Title -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-title-box">
+      <div class="row">
+        <div class="col">
+          <h4 class="page-title">Transactions</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Account</a></li>
+            <li class="breadcrumb-item active">Transactions History</li>
+          </ol>
+        </div><!--end col-->
+      </div><!--end row-->
+    </div><!--end page-title-box-->
+  </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Transaction History</h4>
+        <p class="text-muted mb-0">Here are some recent transactions from your connected bank account.</p>
+      </div><!--end card-header-->
+      <div class="card-body">
+        <div class="table-rep-plugin">
+            <table class="table table-striped mb-0 myTable">
+              <thead>
+              <tr>
+                <th>Account ID</th>
+                <th>ID</th>
+                <th data-priority="1">Amount with currency</th>
+                <th data-priority="3">Category</th>
+                <th data-priority="1">Category Type</th>
+                <th data-priority="3">Description</th>
+                <th data-priority="3">Transaction Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @transaction.each do |transaction| %>
+                <tr>
+                  <th><%= transaction.account_id %></th>
+                  <th><%= transaction.id %></th>
+                  <th><%= transaction.amount %> <%= transaction.currency %></th>
+                  <th><%= transaction.category %></th>
+                  <th><%= transaction.category_type %></th>
+                  <th><%= transaction.description %></th>
+                  <th><%= transaction.transaction_date %></th>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+      </div><!--end card-body-->
+    </div><!--end card-->
+  </div> <!-- end col -->
+</div> <!-- end row -->

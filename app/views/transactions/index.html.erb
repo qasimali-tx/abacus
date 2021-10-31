@@ -25,10 +25,10 @@
       </div><!--end card-header-->
       <div class="card-body">
         <div class="table-rep-plugin">
-          <div class="table-responsive mb-0" data-pattern="priority-columns">
-            <table id="tech-companies-1" class="table table-striped mb-0">
+            <table class="table table-striped mb-0 myTable">
               <thead>
               <tr>
+                <th>Account ID</th>
                 <th>ID</th>
                 <th data-priority="1">Amount with currency</th>
                 <th data-priority="3">Category</th>
@@ -38,9 +38,9 @@
               </tr>
               </thead>
               <tbody>
-              <% if @transactions.present? %>
                 <% @transactions.each do |transaction| %>
                   <tr>
+                    <th><%= transaction.account_id %></th>
                     <th><%= transaction.id %></th>
                     <th><%= transaction.amount %> <%= transaction.currency %></th>
                     <th><%= transaction.category %></th>
@@ -49,11 +49,9 @@
                     <th><%= transaction.transaction_date %></th>
                   </tr>
                 <% end %>
-              <% end %>
               </tbody>
             </table>
           </div>
-        </div>
       </div><!--end card-body-->
     </div><!--end card-->
   </div> <!-- end col -->

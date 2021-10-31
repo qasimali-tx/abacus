@@ -24,6 +24,7 @@ require("simplebar");
 import * as moment from "moment";
 require("./theme-js/daterangepicker/daterangepicker");
 import * as ApexCharts from "apexcharts";
+require('datatables.net-bs4')
 
 Rails.start()
 Turbolinks.start()
@@ -75,6 +76,7 @@ $(document).on('turbolinks:load', function() {
 
     cb(start, end, '');
   }
+  $('.myTable').DataTable();
 
   function initMetisMenu() {
     //metis menu
