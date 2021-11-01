@@ -1,7 +1,7 @@
 <div id="container-fastlink">
   <div style="text-align: center;" class="selection">
 
-    <%= hidden_field_tag :field_name, "#{current_user.yodlee_account_token}", :id => 'field_name' %>
+    <%= hidden_field_tag :field_name, "#{ENV["YODLEE_ACCOUNT_TOKEN"]}", :id => 'field_name' %>
 <!--    <input type="submit" id="btn-fastlink" class="btn btn-dark py-2 px-5 font-16 mt-3" value="Link an Account">-->
     <select id="btn-fastlink" class="btn btn-dark py-2 font-16 mt-3">
       <option value="personal" class="btn btn-dark py-2 font-16 mt-3">Personal</option>
