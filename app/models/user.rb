@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :accounts
-  has_one_attached :file
+  has_many_attached :documents
   rolify
   after_create :assign_default_role
   # Include default devise modules. Others available are:
