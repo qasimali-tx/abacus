@@ -2,8 +2,8 @@ class DashboardsController < ApplicationController
   include ApplicationHelper
   before_action :authenticate_user!
   before_action :check_default_source, only: [:create_subscription]
-  before_action :check_login_name , only:[:transaction_history, :fast_link_provider]
-  before_action :yodlee_user_token , only:[:transaction_history, :fast_link_provider]
+  # before_action :check_login_name , only:[:transaction_history, :fast_link_provider]
+  # before_action :yodlee_user_token , only:[:transaction_history, :fast_link_provider]
   def index
   end
 
