@@ -1,27 +1,18 @@
-<!-- Page-Title -->
-<div class="row">
-  <div class="col-sm-12">
-    <div class="page-title-box">
-      <div class="row">
-        <div class="col">
-          <h4 class="page-title">Transactions</h4>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Account</a></li>
-            <li class="breadcrumb-item active">Transactions History</li>
-          </ol>
-        </div><!--end col-->
-      </div><!--end row-->
-    </div><!--end page-title-box-->
-  </div><!--end col-->
-</div><!--end row-->
-<!-- end page title end breadcrumb -->
-<div class="row">
+<div class="row my-3">
   <div class="col-12">
     <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Transaction History</h4>
-        <p class="text-muted mb-0">Here are some recent transactions from your connected bank account.</p>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <h4 class="card-title">Recent Transaction</h4>
+          <p class="text-muted mb-0">Here are some recent transactions from your connected bank account.</p>
+        </div>
+        <div class="col-auto align-self-center">
+          <a href="javascript:;" class="btn btn-sm btn-outline-primary" id="Dash_Date">
+            <span class="ay-name" id="Day_Name">Today:</span>&nbsp;
+            <span class="" id="Select_date">Jan 11</span>
+            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
+          </a>
+        </div>
       </div><!--end card-header-->
       <div class="card-body">
         <div class="table-rep-plugin">

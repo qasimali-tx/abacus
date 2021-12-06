@@ -3,16 +3,7 @@
   <!-- LOGO -->
   <div class="brand">
     <a href="index.html" class="logo">
-      <span>
-        <%= image_tag "logo-sm.png", alt:"logo-small", class:"logo-sm" %>
-        <!--<img src="assets/images/logo-sm.png" alt="logo-small" class="logo-sm">-->
-      </span>
-      <span>
-        <%= image_tag "logo.png", alt:"logo-large", class:"logo-lg logo-light" %>
-        <%= image_tag "logo-dark.png", alt:"logo-large", class:"logo-lg logo-dark" %>
-        <!--<img src="assets/images/logo.png" alt="logo-large" class="logo-lg logo-light">
-        <img src="assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark">-->
-      </span>
+
     </a>
   </div>
   <!--end logo-->
@@ -25,33 +16,23 @@
           class="mdi mdi-chevron-right"></i></span></a>
       </li>
       <li>
-        <a href="<%= accounts_path %>"> <i data-feather="credit-card"
-                                       class="align-self-center menu-icon"></i><span>Accounts</span><span class="menu-arrow"><i
-          class="mdi mdi-chevron-right"></i></span></a>
-      </li>
-      <li>
         <a href="<%= transactions_path %>"><i data-feather="grid"
-                                          class="align-self-center menu-icon"></i><span></span>Transaction History<span class="menu-arrow"><i
+                                          class="align-self-center menu-icon"></i><span></span>Transactions<span class="menu-arrow"><i
           class="mdi mdi-chevron-right"></i></span></a>
       </li>
       <li>
-        <a href="<%= fast_link_provider_dashboards_path %>"><i data-feather="lock"
-                                          class="align-self-center menu-icon"></i><span>Connect Bank Account</span><span class="menu-arrow"><i
-          class="mdi mdi-chevron-right"></i></span></a>
-      </li>
-      <li>
-        <a href="<%= user_path(current_user.id) %>"><i data-feather="upload"
-                                                               class="align-self-center menu-icon"></i><span>Upload Files</span><span class="menu-arrow"><i
-          class="mdi mdi-chevron-right"></i></span></a>
-      </li>
-      <li>
-        <a href="<%= subscriptions_dashboards_path %>"><i data-feather="layers"
-                                  class="align-self-center menu-icon"></i><span>Subscriptions Plan</span><span class="menu-arrow"><i
+        <a href="<%= accounts_path %>"> <i data-feather="credit-card"
+                                           class="align-self-center menu-icon"></i><span>Accounts</span><span class="menu-arrow"><i
           class="mdi mdi-chevron-right"></i></span></a>
       </li>
       <li>
         <a href="<%= files_dashboards_path %>"><i data-feather="file"
                                                           class="align-self-center menu-icon"></i><span>Files</span><span class="menu-arrow"><i
+          class="mdi mdi-chevron-right"></i></span></a>
+      </li>
+      <li>
+        <a href="#"><i data-feather="clipboard"
+                                                  class="align-self-center menu-icon"></i><span>Reports</span><span class="menu-arrow"><i
           class="mdi mdi-chevron-right"></i></span></a>
       </li>
     </ul>
