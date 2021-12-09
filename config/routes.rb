@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       get :transaction_history
       get :files
       post 'get_bank_account'
+      get :notification
+      post :create_notification
+
     end
   end
   resources :accounts

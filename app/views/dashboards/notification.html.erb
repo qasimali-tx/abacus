@@ -1,0 +1,47 @@
+<%= form_with url: create_notification_dashboards_path do |form| %>
+  <div class="row p-4">
+    <div class="form-group col-md-5">
+      <label> User ID</label>
+      <%= form.select :user_id, options_for_select(User.all.map { |m| [m.first_name, m.id] }),{:include_blank => 'Select User' }, :class=>'form-control m-b' %>
+    </div>
+    <div class="form-group col-md-5">
+      <label>Text</label>
+      <%= form.text_field :text, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-2 p-4">
+      <%= form.submit 'Submit', class: 'btn btn-primary'%>
+    </div>
+  </div>
+<% end  %>
+
+<div class="row my-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <h4 class="card-title">Recent Notifications</h4>
+        </div>
+      </div><!--end card-header-->
+      <div class="card-body">
+        <div class="table-rep-plugin">
+          <table class="table table-striped mb-0 myTable">
+            <thead>
+            <tr>
+              <th>Username</th>
+              <th>Notification</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% Notification.all.each do |notification| %>
+              <tr>
+                <th><%= notification.user.first_name %></th>
+                <th><%= notification.text %></th>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div><!--end card-body-->
+    </div><!--end card-->
+  </div> <!-- end col -->
+</div> <!-- end row -->

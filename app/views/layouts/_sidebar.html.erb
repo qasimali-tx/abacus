@@ -35,6 +35,13 @@
                                                   class="align-self-center menu-icon"></i><span>Reports</span><span class="menu-arrow"><i
           class="mdi mdi-chevron-right"></i></span></a>
       </li>
+      <% if current_user.has_role? :super_admin %>
+      <li>
+        <a href="<%= notification_dashboards_path %>"><i data-feather="info"
+                                                         class="align-self-center menu-icon"></i><span>Notifications</span><span class="menu-arrow"><i
+          class="mdi mdi-chevron-right"></i></span></a>
+      </li>
+        <% end %>
     </ul>
   </div>
 </div>
