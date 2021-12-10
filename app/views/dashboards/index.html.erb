@@ -1,38 +1,5 @@
-<!-- Page-Title -->
 <div class="row">
-  <div class="col-sm-12">
-    <div class="page-title-box">
-      <div class="row">
-        <div class="col">
-          <h4 class="page-title">Analytics</h4>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Dastone</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
-          </ol>
-        </div>
-        <!--end col-->
-        <div class="col-auto align-self-center">
-          <a href="javascript:;" class="btn btn-sm btn-outline-primary" id="Dash_Date">
-            <span class="ay-name" id="Day_Name">Today:</span>&nbsp;
-            <span class="" id="Select_date">Jan 11</span>
-            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
-          </a>
-          <a href="javascript:;" class="btn btn-sm btn-outline-primary">
-            <i data-feather="download" class="align-self-center icon-xs"></i>
-          </a>
-        </div>
-        <!--end col-->
-      </div>
-      <!--end row-->
-    </div>
-    <!--end page-title-box-->
-  </div>
-  <!--end col-->
-</div>
-<!--end row-->
-<!-- end page title end breadcrumb -->
-<div class="row">
-  <div class="col-lg-6 ">
+  <div class="col-lg-6 my-3">
     <div class="card res-cards">
       <div class="card-header">
         <div class="row align-items-center">
@@ -53,7 +20,7 @@
   </div>
 
   <!--end col-->
-  <div class="col-lg-6">
+  <div class="col-lg-6 my-3">
     <div class="card res-cards">
       <div class="card-header">
         <div class="row align-items-center">
@@ -88,7 +55,7 @@
       <div class="card-header">
         <div class="row align-items-center">
           <div class="col">
-            <h4 class="card-title">Accounts</h4>
+            <h4 class="card-title">Transactions</h4>
           </div>
           <!--end col-->
         </div>
@@ -101,99 +68,29 @@
           <table class="table mb-0 ">
             <thead class="table-light">
             <tr>
-              <th class="border-top-0">Channel</th>
-              <th class="border-top-0">Sessions</th>
-              <th class="border-top-0">Prev.Period</th>
-              <th class="border-top-0">% Change</th>
+              <th class="border-top-0">Transaction</th>
+              <th class="border-top-0">Account</th>
+              <th class="border-top-0">Amount</th>
+              <th class="border-top-0">Category</th>
             </tr>
             <!--end tr-->
             </thead>
             <tbody>
+            <% @accounts.each do |account| %>
             <tr>
-              <td><a href="" class="text-primary">Organic search</a></td>
-              <td>10853<small class="text-muted">(52%)</small></td>
-              <td>566<small class="text-muted">(92%)</small></td>
-              <td> 52.80% <i class="fas fa-caret-up text-success font-16"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Direct</a></td>
-              <td>2545<small class="text-muted">(47%)</small></td>
-              <td>498<small class="text-muted">(81%)</small></td>
-              <td> -17.20% <i class="fas fa-caret-down text-danger font-16"></i></td>
+              <td><%= account.transactions.first.category %></td>
+              <td><%= account.provider_name %></td>
+              <td><%= account.transactions.first.amount %></td>
+              <td><%= account.account_type %></td>
 
             </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Referal</a></td>
-              <td>1836<small class="text-muted">(38%)</small></td>
-              <td>455<small class="text-muted">(74%)</small></td>
-              <td> 41.12% <i class="fas fa-caret-up text-success font-16"></i></td>
-
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Email</a></td>
-              <td>1958<small class="text-muted">(31%)</small></td>
-              <td>361<small class="text-muted">(61%)</small></td>
-              <td> -8.24% <i class="fas fa-caret-down text-danger font-16"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
-
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
-            <tr>
-              <td><a href="" class="text-primary">Social</a></td>
-              <td>1566<small class="text-muted">(26%)</small></td>
-              <td>299<small class="text-muted">(49%)</small></td>
-              <td> 29.33% <i class="fas fa-caret-up text-success"></i></td>
-            </tr>
-            <!--end tr-->
+              <% end  %>
 
             </tbody>
           </table>
           <!--end table-->
         </div>
+        <!--end /div-->
         <!--end /div-->
       </div>
       <!--end card-body-->
@@ -230,48 +127,7 @@
       <div class="card-body">
         <div class="analytic-dash-activity" data-simplebar>
           <div class="activity">
-            <div class="activity-info">
-              <div class="icon-info-activity">
-                <i class="las la-user-clock bg-soft-primary"></i>
-              </div>
-              <div class="activity-info-text">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-muted mb-0 font-13 w-75"><span>Donald</span>
-                    updated the status of <a href="">Refund #1234</a> to awaiting customer response
-                  </p>
-                  <small class="text-muted">10 Min ago</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="activity-info">
-              <div class="icon-info-activity">
-                <i class="mdi mdi-timer-off bg-soft-primary"></i>
-              </div>
-              <div class="activity-info-text">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-muted mb-0 font-13 w-75"><span>Lucy Peterson</span>
-                    was added to the group, group name is <a href="">Overtake</a>
-                  </p>
-                  <small class="text-muted">50 Min ago</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="activity-info">
-              <div class="icon-info-activity">
-                <!--                <!%= image_tag "users/user-5.jpg", alt:"", class:"rounded-circle thumb-sm"%>-->
-                <!--<img src="assets/images/users/user-5.jpg" alt="" class="rounded-circle thumb-sm">-->
-              </div>
-              <div class="activity-info-text">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-muted mb-0 font-13 w-75"><span>Joseph Rust</span>
-                    opened new showcase <a href="">Mannat #112233</a> with theme market
-                  </p>
-                  <small class="text-muted">10 hours ago</small>
-                </div>
-              </div>
-            </div>
+            <% current_user.notifications.each do |notification| %>
 
             <div class="activity-info">
               <div class="icon-info-activity">
@@ -279,40 +135,14 @@
               </div>
               <div class="activity-info-text">
                 <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-muted mb-0 font-13 w-75"><span>Donald</span>
-                    updated the status of <a href="">Refund #1234</a> to awaiting customer response
-                  </p>
-                  <small class="text-muted">Yesterday</small>
+                  <p class="text-muted mb-0 font-13 w-75"><%= notification.text %></p>
+                  <small class="text-muted"><%= notification.created_at.strftime('%d %B %Y')%></small>
                 </div>
               </div>
             </div>
-            <div class="activity-info">
-              <div class="icon-info-activity">
-                <i class="mdi mdi-alert-outline bg-soft-primary"></i>
-              </div>
-              <div class="activity-info-text">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-muted mb-0 font-13 w-75"><span>Lucy Peterson</span>
-                    was added to the group, group name is <a href="">Overtake</a>
-                  </p>
-                  <small class="text-muted">14 Nov 2019</small>
-                </div>
-              </div>
-            </div>
-            <div class="activity-info">
-              <div class="icon-info-activity">
-                <%#!= image_tag "users/user-4.jpg", alt:"", class:"rounded-circle thumb-sm"%>
-                <!--<img src="assets/images/users/user-4.jpg" alt="" class="rounded-circle thumb-sm">-->
-              </div>
-              <div class="activity-info-text">
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-muted mb-0 font-13 w-75"><span>Joseph Rust</span>
-                    opened new showcase <a href="">Mannat #112233</a> with theme market
-                  </p>
-                  <small class="text-muted">15 Nov 2019</small>
-                </div>
-              </div>
-            </div>
+
+            <% end %>
+
           </div>
           <!--end activity-->
         </div>
@@ -324,4 +154,3 @@
   </div>
   <!--end col-->
 </div>
-<!--end row-->

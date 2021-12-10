@@ -5,6 +5,16 @@ class DashboardsController < ApplicationController
   # before_action :check_login_name , only:[:transaction_history, :fast_link_provider]
   # before_action :yodlee_user_token , only:[:transaction_history, :fast_link_provider]
   def index
+    @accounts = Account.joins(:transactions).where("user_id" => current_user.id)
+  end
+
+  def notification
+    @notification = Notification.new
+  end
+
+  def create_notification
+    @notification = Notification.create!(text: params[:text], user_id: params[:user_id])
+    redirect_to notification_dashboards_path
   end
 
   def subscriptions

@@ -2,54 +2,138 @@
   <div class="col-sm-12">
     <div class="page-title-box">
       <div class="row">
-        <div class="col">
-          <h4 class="page-title">Accounts</h4>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
-            <li class="breadcrumb-item"><a href="javascript:void(0);">Account History</a></li>
-            <li class="breadcrumb-item active">Accounts</li>
-          </ol>
-        </div><!--end col-->
-      </div><!--end row-->
-    </div><!--end page-title-box-->
-  </div><!--end col-->
-</div><!--end row-->
-<!-- end page title end breadcrumb -->
-<div class="row">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="table-rep-plugin">
+        <div class="col d-flex justify-content-between align-items-center">
+          <div>
+            <h4 class="page-title">Accounts</h4>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Abacus</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Account History</a></li>
+              <li class="breadcrumb-item active">Accounts</li>
+            </ol>
+          </div>
+          <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-soft-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fas fa-plus me-2"></i>
+              <span>Add account</span>
+            </button>
+          </div><!--end col-->
+        </div><!--end row-->
+      </div><!--end page-title-box-->
+    </div><!--end col-->
+  </div><!--end row-->
+  <!-- end page title end breadcrumb -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-rep-plugin">
             <table class="table table-striped mb-0 myTable">
               <thead>
               <tr>
-                <th data-priority="1">UserName</th>
-                <th data-priority="1">Account ID</th>
-                <th data-priority="1">Provider ID</th>
-                <th data-priority="3">Provider Name</th>
-                <th data-priority="1">Provider Account ID</th>
-                <th data-priority="3">Account Type</th>
-                <th data-priority="3">Status</th>
-                <th data-priority="3">Transactions</th>
+                <th data-priority="1">Account Name</th>
+                <th data-priority="1">Type</th>
+                <th data-priority="1">Account Type</th>
+                <th data-priority="3">Balance</th>
+                <th data-priority="3">Actions</th>
               </tr>
               </thead>
               <tbody>
-                <% @accounts.each do |account| %>
-                  <tr>
-                    <th><%= account.user.first_name %></th>
-                    <th><%= account.id %></th>
-                    <th><%= account.provider_id %></th>
-                    <th><%= account.provider_name %></th>
-                    <th><%= account.provider_account_id %></th>
-                    <th><%= account.account_type %></th>
-                    <th><%= account.status %></th>
-                    <th><%= link_to 'View Transaction' , transaction_path(account), class: 'btn btn-secondary btn-sm' %></th>
-                  </tr>
-                <% end %>
+              <% @accounts.each do |account| %>
+                <tr>
+                  <th><%= account.provider_name %></th>
+                  <th><%= account.id %></th>
+                  <th><%= account.account_type %></th>
+                  <th>$1000</th>
+                  <th>
+                    <div>
+                      <%= link_to 'View Transaction' , transaction_path(account), class: 'btn btn-secondary btn-sm me-2' %>
+                      <%= link_to 'Edit Account' , transaction_path(account), class: 'btn btn-secondary btn-sm me-2' %>
+                      <%= link_to 'Disconnect' , transaction_path(account), class: 'btn btn-secondary btn-sm me-2' %>
+                    </div>
+                  </th>
+                </tr>
+              <% end %>
               </tbody>
             </table>
           </div>
         </div>
-    </div><!--end card-->
-  </div> <!-- end col -->
-</div> <!-- end row -->
+      </div><!--end card-->
+    </div> <!-- end col -->
+  </div> <!-- end row -->
+  <!-- Modal/start -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title" id="exampleModalLabel">Add a new account</h5>
+          <button type="button" class="btn btn-secondary bg-transparent border-0" data-bs-dismiss="modal">close</button>
+        </div>
+        <div class="modal-body py-3">
+          <div id="container-fastlink">
+            <div class="selection">
+              <%= hidden_field_tag :field_name, "#{current_user.yodlee_account_token}", :id => 'field_name' %>
+              <!--    <input type="submit" id="btn-fastlink" class="btn btn-dark py-2 px-5 font-16 mt-3" value="Link an Account">-->
+              <select id="btn-fastlink" class="py-2 font-16 mt-3 btn btn-soft-primary">
+                <option disabled selected class="bg-white text-muted text-start">Select an option</option>
+                <option value="personal" class="bg-white text-dark py-2 text-start font-16 mt-3">Personal</option>
+                <option value="business" class="bg-white text-dark py-2 text-start font-16 mt-3">Business</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal/end -->
+<script>
+    $(document).on('turbolinks:load', function() {
+        var yodlee_account_token = $('#field_name').val();
+        var url = "<%= ENV["FAST_LINK_KEY"] %>";
+        (function (window) {
+            //Open FastLink
+            var fastlinkBtn = document.getElementById('btn-fastlink');
+            fastlinkBtn.addEventListener(
+                'click',
+                function() {
+                    window.fastlink.open({
+                            fastLinkURL: url,
+                            accessToken: 'Bearer '+yodlee_account_token,
+                            params: {
+                                configName : 'Aggregation'
+                            },
+                            onSuccess: function (data) {
+                                // will be called on success. For list of possible message, refer to onSuccess(data) Method.
+                                console.log(data);
+                            },
+                            onError: function (data) {
+                                // will be called on error. For list of possible message, refer to onError(data) Method.
+                                console.log(data);
+                            },
+                            onClose: function (data) {
+                                var account_detail = Object.values(data)
+                                var accountType =document.getElementById("btn-fastlink").value;
+                                if ( account_detail[2].length !== 0  ){
+                                    $.ajax({
+                                        type: "post",
+                                        url: "/dashboards/get_bank_account",
+                                        data: {dataArray: account_detail[2], account_type: accountType}
+                                    });
+                                }
+                            },
+                            onEvent: function (data) {
+                                // will be called on intermittent status update.
+                                console.log(data);
+                            }
+                        },
+                        'container-fastlink');
+                },
+                false);
+            $( ".selection" ).click(function() {
+                $( ".selection" ).hide();
+            });
+        }(window));
+    });
+</script>
