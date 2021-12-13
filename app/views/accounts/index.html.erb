@@ -137,44 +137,6 @@
                     },
                     'container-fastlink');
             });
-
-            // fastlinkBtn.addEventListener(
-            //     'click',
-            //     function() {
-            //
-            //         window.fastlink.open({
-            //                 fastLinkURL: url,
-            //                 accessToken: 'Bearer '+yodlee_account_token,
-            //                 params: {
-            //                     configName : 'Aggregation'
-            //                 },
-            //                 onSuccess: function (data) {
-            //                     // will be called on success. For list of possible message, refer to onSuccess(data) Method.
-            //                     console.log(data);
-            //                 },
-            //                 onError: function (data) {
-            //                     // will be called on error. For list of possible message, refer to onError(data) Method.
-            //                     console.log(data);
-            //                 },
-            //                 onClose: function (data) {
-            //                     var account_detail = Object.values(data)
-            //                     var accountType =document.getElementById("btn-fastlink").optvalue;
-            //                     if ( account_detail[2].length !== 0  ){
-            //                         $.ajax({
-            //                             type: "post",
-            //                             url: "/dashboards/get_bank_account",
-            //                             data: {dataArray: account_detail[2], account_type: accountType}
-            //                         });
-            //                     }
-            //                 },
-            //                 onEvent: function (data) {
-            //                     // will be called on intermittent status update.
-            //                     console.log(data);
-            //                 }
-            //             },
-            //             'container-fastlink');
-            //     },
-            //     false);
             $( ".selection" ).click(function() {
                 $( ".selection" ).hide();
             });
