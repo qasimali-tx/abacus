@@ -35,7 +35,7 @@
                 <th data-priority="1">Type</th>
                 <th data-priority="1">Account Type</th>
                 <th data-priority="3">Balance</th>
-                <th data-priority="3">Actions</th>
+                <th data-priority="3">Transactions</th>
               </tr>
               </thead>
               <tbody>
@@ -61,7 +61,12 @@
       </div><!--end card-->
     </div> <!-- end col -->
   </div> <!-- end row -->
+
+
   <!-- Modal/start -->
+
+
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -72,15 +77,13 @@
         </div>
         <div class="modal-body py-3">
           <div id="container-fastlink">
-            <div class="selection">
-              <%= hidden_field_tag :field_name, "#{current_user.yodlee_account_token}", :id => 'field_name' %>
-              <!--    <input type="submit" id="btn-fastlink" class="btn btn-dark py-2 px-5 font-16 mt-3" value="Link an Account">-->
-              <select id="btn-fastlink" class="py-2 font-16 mt-3 btn btn-soft-primary">
-                <option disabled selected class="bg-white text-muted text-start">Select an option</option>
-                <option value="personal" class="bg-white text-dark py-2 text-start font-16 mt-3">Personal</option>
-                <option value="business" class="bg-white text-dark py-2 text-start font-16 mt-3">Business</option>
-              </select>
-            </div>
+            <%= hidden_field_tag :field_name, "#{current_user.yodlee_account_token}", :id => 'field_name' %>
+<!--                <input type="submit" id="btn-fastlink" class="btn btn-dark py-2 px-5 font-16 mt-3" value="Link an Account">-->
+            <select id="btn-fastlink" class="py-2 mt-3 btn btn-soft-primary">
+              <option disabled selected class="bg-white text-muted text-start">Select an option</option>
+              <option value="personal" class="bg-white text-dark py-2 text-start font-16 mt-3">Personal</option>
+              <option value="business" class="bg-white text-dark py-2 text-start font-16 mt-3">Business</option>
+            </select>
           </div>
         </div>
       </div>
@@ -88,49 +91,90 @@
   </div>
 </div>
 <!-- Modal/end -->
+
 <script>
     $(document).on('turbolinks:load', function() {
         var yodlee_account_token = $('#field_name').val();
         var url = "<%= ENV["FAST_LINK_KEY"] %>";
         (function (window) {
             //Open FastLink
-            var fastlinkBtn = document.getElementById('btn-fastlink');
-            fastlinkBtn.addEventListener(
-                'click',
-                function() {
-                    window.fastlink.open({
-                            fastLinkURL: url,
-                            accessToken: 'Bearer '+yodlee_account_token,
-                            params: {
-                                configName : 'Aggregation'
-                            },
-                            onSuccess: function (data) {
-                                // will be called on success. For list of possible message, refer to onSuccess(data) Method.
-                                console.log(data);
-                            },
-                            onError: function (data) {
-                                // will be called on error. For list of possible message, refer to onError(data) Method.
-                                console.log(data);
-                            },
-                            onClose: function (data) {
-                                var account_detail = Object.values(data)
-                                var accountType =document.getElementById("btn-fastlink").value;
-                                if ( account_detail[2].length !== 0  ){
-                                    $.ajax({
-                                        type: "post",
-                                        url: "/dashboards/get_bank_account",
-                                        data: {dataArray: account_detail[2], account_type: accountType}
-                                    });
-                                }
-                            },
-                            onEvent: function (data) {
-                                // will be called on intermittent status update.
-                                console.log(data);
+            var optvalue = '';
+            $('#btn-fastlink').change(function() {
+                var $option = $(this).find('option:selected');
+                optvalue = $option.val(); //returns the value of the selected option.
+
+
+
+                window.fastlink.open({
+                        fastLinkURL: url,
+                        accessToken: 'Bearer '+yodlee_account_token,
+                        params: {
+                            configName : 'Aggregation'
+                        },
+                        onSuccess: function (data) {
+                            // will be called on success. For list of possible message, refer to onSuccess(data) Method.
+                            console.log(data);
+                        },
+                        onError: function (data) {
+                            // will be called on error. For list of possible message, refer to onError(data) Method.
+                            console.log(data);
+                        },
+                        onClose: function (data) {
+                            var account_detail = Object.values(data)
+                            var accountType =document.getElementById("btn-fastlink").optvalue;
+                            if ( account_detail[2].length !== 0  ){
+                                $.ajax({
+                                    type: "post",
+                                    url: "/dashboards/get_bank_account",
+                                    data: {dataArray: account_detail[2], account_type: accountType}
+                                });
                             }
                         },
-                        'container-fastlink');
-                },
-                false);
+                        onEvent: function (data) {
+                            // will be called on intermittent status update.
+                            console.log(data);
+                        }
+                    },
+                    'container-fastlink');
+            });
+
+            // fastlinkBtn.addEventListener(
+            //     'click',
+            //     function() {
+            //
+            //         window.fastlink.open({
+            //                 fastLinkURL: url,
+            //                 accessToken: 'Bearer '+yodlee_account_token,
+            //                 params: {
+            //                     configName : 'Aggregation'
+            //                 },
+            //                 onSuccess: function (data) {
+            //                     // will be called on success. For list of possible message, refer to onSuccess(data) Method.
+            //                     console.log(data);
+            //                 },
+            //                 onError: function (data) {
+            //                     // will be called on error. For list of possible message, refer to onError(data) Method.
+            //                     console.log(data);
+            //                 },
+            //                 onClose: function (data) {
+            //                     var account_detail = Object.values(data)
+            //                     var accountType =document.getElementById("btn-fastlink").optvalue;
+            //                     if ( account_detail[2].length !== 0  ){
+            //                         $.ajax({
+            //                             type: "post",
+            //                             url: "/dashboards/get_bank_account",
+            //                             data: {dataArray: account_detail[2], account_type: accountType}
+            //                         });
+            //                     }
+            //                 },
+            //                 onEvent: function (data) {
+            //                     // will be called on intermittent status update.
+            //                     console.log(data);
+            //                 }
+            //             },
+            //             'container-fastlink');
+            //     },
+            //     false);
             $( ".selection" ).click(function() {
                 $( ".selection" ).hide();
             });
