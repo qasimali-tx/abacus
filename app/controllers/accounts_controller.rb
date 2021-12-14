@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
   private
   def check_login_name
     if current_user.yodlee_login_name.blank?
-      current_user.update(yodlee_login_name: ENV["YODLEE_ADMIN_LOGOINNAME"])
+      current_user.update(yodlee_login_name: ENV["YODLEE_USER_LOGOINNAME"])
     end
   end
 end
