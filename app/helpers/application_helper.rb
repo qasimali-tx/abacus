@@ -22,7 +22,7 @@ module ApplicationHelper
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = "application/x-www-form-urlencoded"
     request["Api-Version"] = "1.1"
-    request["loginName"] = current_user.yodlee_login_name
+    request["loginName"] = ENV["YODLEE_USER_LOGOINNAME"]
     request["Cookie"] = "visid_incap_1070612=5yvC92sSS4yVQoLidXqbY/HZ72AAAAAAQUIPAAAAAACEJ+a/IZsG7NOy8n/GaFd/"
     request.body = "clientId=#{ENV["YODLEE_CLIENT_ID"]}&secret=#{ENV["YODLEE_SECRET_ID"]}"
     response = https.request(request)
