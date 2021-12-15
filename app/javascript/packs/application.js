@@ -47,13 +47,69 @@ $(document).on('turbolinks:load', function() {
       if ((end - start) < 100 || label == 'Today') {
         title = 'Today:';
         range = start.format('MMM D');
+
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title}
+          });
+
       } else if (label == 'Yesterday') {
         title = 'Yesterday:';
         range = start.format('MMM D');
-      } else {
-        range = start.format('MMM D') + ' - ' + end.format('MMM D');
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title}
+          });
       }
+      else if (label == 'Last 7 Days'){
+          title = 'Last 7 Days:';
+          range = start.format('MMM D') + ' - ' + end.format('MMM D');
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title}
+          });
 
+      }
+      else if (label == 'Last 30 Days'){
+          title = 'Last 30 Days:';
+          range = start.format('MMM D') + ' - ' + end.format('MMM D');
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title}
+          });
+      }
+      else if (label == 'This Month'){
+          title = 'This Month:';
+          range = start.format('MMM D') + ' - ' + end.format('MMM D');
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title}
+          });
+      }
+      else if (label == 'Last Month'){
+          title = 'Last Month:';
+          range = start.format('MMM D') + ' - ' + end.format('MMM D');
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title}
+          });
+      }
+      else if (label == 'Custom Range'){
+          title = 'Custom Range:';
+          range = start.format('MMM D') + ' - ' + end.format('MMM D');
+          $.ajax({
+              type: "get",
+              url: "/transactions",
+              data: {title: title, start: start._d, end: end._d}
+          });
+
+      }
       picker.find('#Select_date').html(range);
       picker.find('#Day_Name').html(title);
     }
@@ -357,3 +413,22 @@ $(document).on('turbolinks:load', function() {
   Inputmask({"mask": "9999"}).mask($("#cvc"));
   Inputmask({"mask": "999999"}).mask($('#postal'));
 })
+
+$(document).on('turbolinks:load', function() {
+    var date = new Date();
+    var dd = date.getDate();
+    var mm = date.toLocaleString('default',{month: 'short'});
+    var today = `: ${mm} ${dd}`;
+
+    console.log($('recent_trans_dropDown :selected').val())
+    $('.recent_trans_dropDown').change(function () {
+        var $option = $(this).find("option:selected");
+        var optValue = $option.val();
+        $option[0].innerHTML += today;
+    })
+
+})
+
+
+
+

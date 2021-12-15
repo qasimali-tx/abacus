@@ -86,7 +86,8 @@ class DashboardsController < ApplicationController
                                 status: dataArray[:status], provider_account_id: dataArray[:providerAccountId],
                                 account_type: params[:account_type], user_id: current_user.id)
     end
-    render js: "window.location = '#{root_path}'"
+    render js: "window.location = '#{accounts_path}'"
+
   end
 
   def check_default_source
